@@ -1,23 +1,24 @@
-import React, {useCallback, useEffect, useState} from 'react';
-import {FlatList, RefreshControl, useColorScheme, View} from 'react-native';
-import uuid from 'react-native-uuid';
-import {useDispatch, useSelector} from 'react-redux';
-import { NewsTags } from '../../components/NewsTags/NewsTags';
-import { SearchInput } from '../../components/SearchInput/SearchInput';
-import {NewsCategory} from '../../constants';
-import {getNewsFeed} from '../../redux/actions';
-import styles from './stylesFeed';
-import { NewsArticle } from '../../components/NewsArticle/NewsArticle';
+import React, { useCallback, useEffect, useState } from "react";
+import { FlatList, RefreshControl, useColorScheme, View } from "react-native";
+import uuid from "react-native-uuid";
+import { useDispatch, useSelector } from "react-redux";
+import { NewsTags } from "../../components/NewsTags/NewsTags";
+import { SearchInput } from "../../components/SearchInput/SearchInput";
+import { NewsCategory } from "../../constants";
+import { getNewsFeed } from "../../redux/actions";
+import styles from "./stylesFeed";
+import { NewsArticle } from "../../components/NewsArticle/NewsArticle";
+
 
 export const Feed: React.FC = () => {
-  const {newsFeed, searchResults} = useSelector(
-    (state: any) => state.feedReducer,
+  const { newsFeed, searchResults } = useSelector(
+    (state: any) => state.feedReducer
   );
   const [isLoading, setIsLoading] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(
-    NewsCategory.business,
+    NewsCategory.business
   );
-  const [searchText, setSearchText] = useState('');
+  const [searchText, setSearchText] = useState("");
   const dispatch: Function = useDispatch();
   useEffect(() => {
     dispatch(getNewsFeed(setIsLoading, selectedCategory));
@@ -25,9 +26,10 @@ export const Feed: React.FC = () => {
   const handleRefresh = useCallback(() => {
     dispatch(getNewsFeed(setIsLoading, selectedCategory));
   }, [dispatch, selectedCategory]);
-  const backgroundColor = useColorScheme() === 'dark' ? '#000' : '#fff';
+  const backgroundColor = useColorScheme() === "dark" ? "#000" : "#fff";
   return (
-    <View style={[styles.container, {backgroundColor}]}>
+    <View style={[styles.container, { backgroundColor }]}>
+      
       <SearchInput
         searchText={searchText}
         setSearchText={setSearchText}
@@ -43,7 +45,7 @@ export const Feed: React.FC = () => {
         keyExtractor={() => uuid.v4()?.toString()}
         showsVerticalScrollIndicator={false}
         data={searchText?.trim() ? searchResults : newsFeed}
-        renderItem={({item, index}: any) => (
+        renderItem={({ item, index }: any) => (
           <NewsArticle post={item} index={index} />
         )}
         refreshControl={
@@ -51,6 +53,7 @@ export const Feed: React.FC = () => {
         }
         style={styles.list}
       />
+     
     </View>
   );
 };

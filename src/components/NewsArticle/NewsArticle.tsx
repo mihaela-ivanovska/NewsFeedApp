@@ -20,7 +20,7 @@ export const NewsArticle: React.FC<{
 }> = ({post, index}) => {
   const navigation: any = useNavigation();
   const handleNavigate = useCallback(() => {
-    navigation.navigate('NewsDetails', {article: post, articleIndex: index});
+    navigation.navigate('NewsDetails',  {article: post, articleIndex: index});
   }, [index, navigation, post]);
   return (
     <TouchableOpacity
