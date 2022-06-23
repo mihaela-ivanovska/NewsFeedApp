@@ -11,21 +11,22 @@ import { NewsArticle } from "../../components/NewsArticle/NewsArticle";
 
 
 export const Feed: React.FC = () => {
-  const { newsFeed, searchResults } = useSelector(
+  const { newsFeed, searchResults, selectedLanguage } = useSelector(
     (state: any) => state.feedReducer
   );
   const [isLoading, setIsLoading] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(
     NewsCategory.business
   );
+  console.log('Test' + selectedLanguage);
   const [searchText, setSearchText] = useState("");
   const dispatch: Function = useDispatch();
   useEffect(() => {
-    dispatch(getNewsFeed(setIsLoading, selectedCategory));
-  }, [dispatch, selectedCategory]);
+    dispatch(getNewsFeed(setIsLoading, selectedCategory, selectedLanguage));
+  }, [dispatch, selectedCategory, selectedLanguage]);
   const handleRefresh = useCallback(() => {
-    dispatch(getNewsFeed(setIsLoading, selectedCategory));
-  }, [dispatch, selectedCategory]);
+    dispatch(getNewsFeed(setIsLoading, selectedCategory, selectedLanguage));
+  }, [dispatch, selectedCategory, selectedLanguage]);
   const backgroundColor = useColorScheme() === "dark" ? "#000" : "#fff";
   return (
     <View style={[styles.container, { backgroundColor }]}>

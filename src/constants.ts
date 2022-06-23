@@ -1,6 +1,9 @@
 interface NewsCategoryTypes {
     [key: string]: string;
   }
+  interface LanguageTypes {
+    [key: string]: string;
+  }
   
   export const NewsCategory: NewsCategoryTypes = {
     business: 'business',
@@ -11,3 +14,8 @@ interface NewsCategoryTypes {
     sports: 'sports',
     technology: 'technology',
   };
+
+  export const Language: LanguageTypes = {
+    english: 'en',
+    german: 'de'
+  }

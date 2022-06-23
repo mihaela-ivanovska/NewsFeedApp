@@ -3,14 +3,14 @@ import { NewsCategory } from "../constants";
 export const GET_NEWS_FEED = 'GET_NEWS_FEED';
 export const SEARCH_NEWS = 'SEARCH_NEWS';
 export const RESET_SEARCH_RESULTS = 'RESET_SEARCH_RESULTS';
-
+export const SET_LANGUAGE = 'SET_LANGUAGE';
 export const getNewsFeed =
-(setIsLoading: Function, category: String = NewsCategory.business) =>
+(setIsLoading: Function, category: String = NewsCategory.business, language: String) =>
 async (dispatch: Function) => {
   try {
     setIsLoading(true);
     const res = await apiClient.get(
-      `top-headlines?language=en&category=${category}`,
+      `top-headlines?language=${language}&category=${category}`,
     );
     setIsLoading(false);
     if (res.status === 200) {
