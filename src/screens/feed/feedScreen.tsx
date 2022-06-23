@@ -18,7 +18,7 @@ export const Feed: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState(
     NewsCategory.business
   );
-  console.log('Test' + selectedLanguage);
+ 
   const [searchText, setSearchText] = useState("");
   const dispatch: Function = useDispatch();
   useEffect(() => {
